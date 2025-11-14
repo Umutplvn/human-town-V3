@@ -4,22 +4,33 @@ const express = require("express");
 const router = express.Router();
 const mailController = require("../controllers/mail");
 
+// ------------------- Mail Routes -------------------
 
-// CREATE & DRAFT
-router.post("/", mailController.createMail);
+// Create / Send mail
+router.post("/create", mailController.createMail);
 
-// READ
+// Get mails by folder (inbox, sent, draft, trash, spam, archive)
 router.get("/", mailController.getMails);
-router.get("/mail/:id", mailController.getMailById);
+
+// Get single mail by id
+router.get("/:id", mailController.getMailById);
+
+// Get mails by thread
 router.get("/thread/:threadId", mailController.getThreadMails);
 
-// REPLY & FORWARD
+// Reply to mail
 router.post("/reply", mailController.replyMail);
+
+// Forward mail
 router.post("/forward", mailController.forwardMail);
 
-// DELETE - RESTORE
-router.delete("/del/:id", mailController.deleteMail);
+// Delete mail (move to trash or permanently)
+router.delete("/delete/:id", mailController.deleteMail);
+
+// Restore mail from trash
 router.post("/restore/:id", mailController.restoreMail);
-router.delete("/del/:id/both", mailController.deleteMailBothSides);
+
+// Delete mail from both sides (sender only)
+router.delete("/:id/both", mailController.deleteMailBothSides);
 
 module.exports = router;

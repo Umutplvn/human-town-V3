@@ -9,24 +9,18 @@ const MailSchema = new mongoose.Schema(
       ref: "Admin",
       required: true,
     },
-
     to: [{ type: mongoose.Schema.Types.ObjectId, ref: "Admin" }],
-
     cc: [{ type: mongoose.Schema.Types.ObjectId, ref: "Admin" }],
-
     bcc: [{ type: mongoose.Schema.Types.ObjectId, ref: "Admin" }],
-
     subject: {
       type: String,
       required: true,
       trim: true,
     },
-
     message: {
       type: String,
       required: true,
     },
-
     attachments: [
       {
         filename: String,
@@ -35,50 +29,11 @@ const MailSchema = new mongoose.Schema(
         mimetype: String,
       },
     ],
-
-    isRead: {
-      type: Boolean,
-      default: false,
-    },
-
-    isStarred: {
-      type: Boolean,
-      default: false,
-    },
-
-    isDeleted: {
-      type: Boolean,
-      default: false,
-    },
-
-    folder: {
-      type: String,
-      enum: ["inbox", "sent", "draft", "trash", "spam", "archive"],
-      default: "inbox",
-    },
-
-    draft: {
-      type: Boolean,
-      default: false,
-    },
-
-    deletable: {
-      type: Boolean,
-      default: false,
-    },
-
-    previousFolder: {
-      type: String,
-      enum: ["inbox", "sent", "draft", "trash", "spam", "archive"],
-      default: null,
-    },
-
-    deletedAt: { type: Date, default: null },
-
+    draft: { type: Boolean, default: false },
     threadId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       default: () => new mongoose.Types.ObjectId(),
+      required: true,
     },
   },
   { timestamps: true }
