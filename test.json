@@ -1,0 +1,185 @@
+{
+  "info": {
+    "_postman_id": "human-town-api",
+    "name": "Human Town API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Admin - Create",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"umut\",\n  \"email\": \"umut.codes@human.town\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/admin/create",
+          "host": ["{{base_url}}"],
+          "path": ["api","admin","create"]
+        }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"umut.codes@human.town\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/auth/login",
+          "host": ["{{base_url}}"],
+          "path": ["api","auth","login"]
+        }
+      }
+    },
+    {
+      "name": "Mail - Create / Send",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": [\"69178b0d1d62f8526a08d142\"],\n  \"cc\": [],\n  \"bcc\": [],\n  \"subject\": \"Test Mail\",\n  \"message\": \"Merhaba, bu bir test mailidir.\",\n  \"attachments\": [],\n  \"draft\": false,\n  \"deletable\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/mails/create",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails","create"]
+        }
+      }
+    },
+    {
+      "name": "Mail - Get by Folder",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/mails?folder=inbox",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails"],
+          "query": [
+            {
+              "key": "folder",
+              "value": "inbox"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Mail - Reply",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"originalMailId\": \"{{mailId}}\",\n  \"message\": \"Teşekkürler, mesajınızı aldım.\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/mails/reply",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails","reply"]
+        }
+      }
+    },
+    {
+      "name": "Mail - Forward",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"originalMailId\": \"{{mailId}}\",\n  \"to\": [\"69178b0d1d62f8526a08d142\"],\n  \"message\": \"Bu maili forward ediyorum.\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/mails/forward",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails","forward"]
+        }
+      }
+    },
+    {
+      "name": "Mail - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/mails/delete/{{mailId}}",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails","delete","{{mailId}}"]
+        }
+      }
+    },
+    {
+      "name": "Mail - Restore",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/mails/restore/{{mailId}}",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails","restore","{{mailId}}"]
+        }
+      }
+    },
+    {
+      "name": "Mail - Delete Both Sides",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/mails/{{mailId}}/both",
+          "host": ["{{base_url}}"],
+          "path": ["api","mails","{{mailId}}","both"]
+        }
+      }
+    }
+  ]
+}
