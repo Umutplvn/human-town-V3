@@ -2,7 +2,6 @@
 
 const nodemailer = require("nodemailer");
 
-// SMTP ayarları
 const transporter = nodemailer.createTransport({
   host: "smtp.human.town", // kendi mail sunucun
   port: 587,

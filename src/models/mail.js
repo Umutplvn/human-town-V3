@@ -4,73 +4,81 @@ const mongoose = require("mongoose");
 
 const MailSchema = new mongoose.Schema(
   {
-    from: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: "Admin", 
-      required: true 
+    from: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
+      required: true,
     },
 
-    to: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Admin" }
-    ],
+    to: [{ type: mongoose.Schema.Types.ObjectId, ref: "Admin" }],
 
-    cc: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Admin" }
-    ],
+    cc: [{ type: mongoose.Schema.Types.ObjectId, ref: "Admin" }],
 
-    bcc: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Admin" }
-    ],
+    bcc: [{ type: mongoose.Schema.Types.ObjectId, ref: "Admin" }],
 
-    subject: { 
-      type: String, 
-      required: true, 
-      trim: true 
+    subject: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
-    message: { 
-      type: String, 
-      required: true 
+    message: {
+      type: String,
+      required: true,
     },
 
     attachments: [
       {
         filename: String,
-        url: String, 
+        url: String,
         size: Number,
         mimetype: String,
-      }
+      },
     ],
 
-    isRead: { 
-      type: Boolean, 
-      default: false 
+    isRead: {
+      type: Boolean,
+      default: false,
     },
 
-    isStarred: { 
-      type: Boolean, 
-      default: false 
+    isStarred: {
+      type: Boolean,
+      default: false,
     },
 
-    isDeleted: { 
-      type: Boolean, 
-      default: false 
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
 
-    folder: { 
-      type: String, 
-      enum: ["inbox", "sent", "draft", "trash", "spam", "archive"], 
-      default: "inbox" 
+    folder: {
+      type: String,
+      enum: ["inbox", "sent", "draft", "trash", "spam", "archive"],
+      default: "inbox",
     },
 
     draft: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
-    deletable: { 
-      type: Boolean, 
-      default: false 
+    deletable: {
+      type: Boolean,
+      default: false,
+    },
+
+    previousFolder: {
+      type: String,
+      enum: ["inbox", "sent", "draft", "trash", "spam", "archive"],
+      default: null,
+    },
+
+    deletedAt: { type: Date, default: null },
+
+    threadId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      default: () => new mongoose.Types.ObjectId(),
     },
   },
   { timestamps: true }
