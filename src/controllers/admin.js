@@ -27,7 +27,6 @@ module.exports = {
           password: passwordEncrypt(password),
         });
   
-        // Token oluşturma:
         const tokenString = "Token " + passwordEncrypt(data._id + `${new Date()}`);
         await Token.create({ userId: data._id, token: tokenString });
   
@@ -60,11 +59,11 @@ module.exports = {
   update: async (req, res) => {
     try {
       const { userId } = req.params;
-      const { name, email } = req.body;
+      const { name, email, avatar } = req.body;
 
       const user = await Admin.findByIdAndUpdate(
         userId,
-        { name, email },
+        { name, email, avatar },
         { new: true, runValidators: true }
       ).select("-password");
 
