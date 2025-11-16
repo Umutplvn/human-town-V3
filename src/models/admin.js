@@ -20,7 +20,7 @@ const adminSchema = new mongoose.Schema({
   message: props => `${props.value} is not a valid Human Town email!`}
 },
   password: { type: String, trim: true, required: true },
-   name: { type: String, trim: true, required: true }
+   avatar: { type: String, trim: true, required: true }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Admin", adminSchema);
